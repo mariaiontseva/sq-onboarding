@@ -2406,6 +2406,8 @@ function updateProgress() {
   if (done > total) done = total;
   document.getElementById('progressCount').textContent = done;
   document.getElementById('progressFill').style.width = ((done / total) * 100) + '%';
+  var timeEl = panel.querySelector('.progress-time-left');
+  if (timeEl) timeEl.textContent = done >= total ? 'Done!' : 'About ' + ((total - done) * 3) + ' min left';
 
   if (done >= total && !panel.classList.contains('all-done')) {
     panel.classList.add('all-done');
@@ -2614,6 +2616,8 @@ function updateV2Progress() {
   var fillEl = document.getElementById('v2ProgressFill');
   if (countEl) countEl.textContent = done;
   if (fillEl) fillEl.style.width = ((done / total) * 100) + '%';
+  var timeEl = document.querySelector('#v2Expanded .v2-expanded-progress-time');
+  if (timeEl) timeEl.textContent = done >= total ? 'Done!' : 'About ' + ((total - done) * 3) + ' min left';
   // Update trigger pill
   var ringText = document.getElementById('v2RingText');
   var ringFill = document.getElementById('v2RingFill');
