@@ -733,6 +733,29 @@ body {
   line-height: 44px;
 }
 
+/* Widget animations */
+@keyframes widgetOpen {
+  from { opacity: 0; transform: scale(0.92) translateY(8px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes widgetClose {
+  from { opacity: 1; transform: scale(1) translateY(0); }
+  to { opacity: 0; transform: scale(0.92) translateY(8px); }
+}
+@keyframes triggerIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+.v2-expanded.widget-opening {
+  animation: widgetOpen 0.25s ease-out forwards;
+}
+.v2-expanded.widget-closing {
+  animation: widgetClose 0.2s ease-in forwards;
+}
+.v2-trigger.trigger-in {
+  animation: triggerIn 0.2s ease-out forwards;
+}
+
 /* Confetti — canvas burst */
 .confetti-canvas {
   position: fixed;
@@ -754,6 +777,7 @@ body {
   background: #fff;
   border-radius: 14px;
   border: 1px solid #dde2eb;
+  transform-origin: bottom right;
   box-shadow: 0 4px 20px rgba(7, 38, 83, 0.1);
   z-index: 50;
   overflow: hidden;
@@ -829,7 +853,8 @@ body {
 .v2-expanded-cards .recipe-step-num { width: 26px; height: 26px; min-width: 26px; font-size: 12px; }
 .v2-expanded-cards .recipe-card-title { font-size: 13px; }
 .v2-expanded-cards .recipe-card-chevron { width: 16px; height: 16px; }
-.v2-expanded-cards .recipe-card-body { padding: 0 12px 12px 48px; }
+.v2-expanded-cards .recipe-card-body { padding: 0 12px 0 48px; }
+.v2-expanded-cards .recipe-card.active .recipe-card-body { padding: 0 12px 12px 48px; }
 .v2-expanded-cards .recipe-card-desc { font-size: 12.5px; }
 .v2-expanded-cards .btn-recipe-mark { font-size: 11px; padding: 3px 8px; }
 .v2-expanded-cards .btn-recipe-go { font-size: 12px; }
@@ -982,6 +1007,7 @@ body {
   margin-bottom: 6px;
   border: 1px solid #dde2eb;
   overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
 }
 .recipe-card.active {
   border-color: #c9a3d4;
@@ -1048,13 +1074,18 @@ body {
   color: #AE39C6;
 }
 
-/* Expandable body */
+/* Expandable body — animated */
 .recipe-card-body {
-  display: none;
-  padding: 0 14px 14px 53px;
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 14px 0 53px;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.25s ease, padding 0.3s ease;
 }
 .recipe-card.active .recipe-card-body {
-  display: block;
+  max-height: 200px;
+  opacity: 1;
+  padding: 0 14px 14px 53px;
 }
 
 .recipe-card-desc {
@@ -1108,8 +1139,8 @@ body {
   border-color: #e0e5ec;
   background: #fafbfc;
 }
-.recipe-card.completed .recipe-card-body { display: none; }
-.recipe-card.completed.active .recipe-card-body { display: block; }
+.recipe-card.completed .recipe-card-body { max-height: 0; opacity: 0; padding-bottom: 0; }
+.recipe-card.completed.active .recipe-card-body { max-height: 200px; opacity: 1; padding-bottom: 14px; }
 .recipe-card.completed .recipe-card-chevron { color: #c0c9d5; }
 .recipe-card.completed.active .recipe-card-chevron {
   transform: rotate(180deg);
@@ -2543,11 +2574,27 @@ function updateV5Progress() {
 
 function openV2Widget() {
   document.getElementById('v2Trigger').style.display = 'none';
-  document.getElementById('v2Expanded').style.display = 'block';
+  var el = document.getElementById('v2Expanded');
+  el.style.display = 'block';
+  el.classList.remove('widget-closing');
+  el.classList.add('widget-opening');
 }
 function closeV2Widget() {
-  document.getElementById('v2Expanded').style.display = 'none';
-  document.getElementById('v2Trigger').style.display = 'flex';
+  var el = document.getElementById('v2Expanded');
+  el.classList.remove('widget-opening');
+  el.classList.add('widget-closing');
+  el.addEventListener('animationend', function handler() {
+    el.removeEventListener('animationend', handler);
+    el.style.display = 'none';
+    el.classList.remove('widget-closing');
+    var trigger = document.getElementById('v2Trigger');
+    trigger.style.display = 'flex';
+    trigger.classList.add('trigger-in');
+    trigger.addEventListener('animationend', function h2() {
+      trigger.removeEventListener('animationend', h2);
+      trigger.classList.remove('trigger-in');
+    });
+  });
 }
 function closeV2() {
   // not used anymore — kept for compat
