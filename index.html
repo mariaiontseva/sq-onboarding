@@ -991,6 +991,10 @@ body {
   background: #edf1f7 !important;
   color: #6b7c8f !important;
 }
+.recipe-card.active .recipe-step-icon {
+  background: #f3e8f7 !important;
+  color: #AE39C6 !important;
+}
 
 .recipe-card-header {
   display: flex;
@@ -1869,11 +1873,9 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
       Book your onboarding call
     </button>
   </div>
-</div>
 
-<!-- V5: Right Panel variant — 2 mandatory + How SQ Works + Level up -->
-<div class="recipes-panel" id="v5Panel"></div>
-<div class="recipes-panel-bg" id="v5PanelBg"></div>
+  <div class="recipes-panel" id="v5Panel"></div>
+  <div class="recipes-panel-bg" id="v5PanelBg"></div>
 <div class="recipes-panel-scroll" id="v5PanelScroll" style="display:none">
   <div class="recipes-panel-inner">
     <div class="recipes-panel-header">
@@ -2073,6 +2075,7 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7b2d8e" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
     Book your onboarding call
   </button>
+</div>
 </div>
 
 <!-- Welcome Tooltip (hidden by default) -->
