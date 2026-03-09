@@ -1174,6 +1174,223 @@ body {
 }
 
 /* Feature request block */
+/* ===== V4: VIDEO PLACEHOLDER ===== */
+.v4-video-placeholder {
+  margin-top: 8px;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.v4-video-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.v4-video-gradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 60%, rgba(174,57,198,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 40%, rgba(64,117,191,0.15) 0%, transparent 60%);
+}
+.v4-video-play {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #AE39C6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(174,57,198,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.v4-video-play svg {
+  margin-left: 2px;
+}
+.v4-video-placeholder:hover .v4-video-play {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(174,57,198,0.5);
+}
+.v4-video-placeholder.playing .v4-video-play {
+  transform: scale(0.95);
+}
+.v4-video-title {
+  position: absolute;
+  bottom: 12px;
+  left: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  z-index: 1;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+.v4-video-duration {
+  position: absolute;
+  bottom: 12px;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #fff;
+  background: rgba(0,0,0,0.5);
+  padding: 2px 6px;
+  border-radius: 4px;
+  z-index: 1;
+}
+
+/* ===== V4: ANALYZE OVERLAY + MODAL ===== */
+.v4-analyze-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 38, 83, 0.85);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: v4overlayIn 0.3s ease-out;
+}
+@keyframes v4overlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.v4-analyze-modal {
+  background: #fff;
+  border-radius: 14px;
+  width: 440px;
+  max-width: 92vw;
+  padding: 28px 28px 22px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: v4modalIn 0.35s ease-out;
+}
+@keyframes v4modalIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.v4-analyze-modal h2 {
+  font-size: 22px;
+  font-weight: 800;
+  color: #072653;
+  margin-bottom: 14px;
+  line-height: 1.25;
+}
+.v4-modal-infobox {
+  background: linear-gradient(135deg, #f9f0fd 0%, #f0ecfb 50%, #ecf2fd 100%);
+  border: 1px solid #e4d8f0;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 18px;
+}
+.v4-modal-infobox p {
+  font-size: 14px;
+  color: #3a4a5c;
+  line-height: 1.55;
+  margin: 0;
+}
+.v4-modal-infobox a {
+  color: #842697;
+  font-weight: 700;
+  text-decoration: none;
+}
+.v4-modal-infobox a:hover { text-decoration: underline; }
+.v4-modal-video {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, #e8ecf2 0%, #dde3ed 100%);
+  border-radius: 10px;
+  border: 1.5px solid #c8d2e0;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.v4-modal-video-play {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #AE39C6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(174,57,198,0.4);
+  transition: transform 0.2s, box-shadow 0.2s;
+  z-index: 1;
+}
+.v4-modal-video-play svg { margin-left: 3px; }
+.v4-modal-video:hover .v4-modal-video-play {
+  transform: scale(1.08);
+  box-shadow: 0 6px 24px rgba(174,57,198,0.5);
+}
+/* Fake UI skeleton inside video */
+.v4-modal-video-skeleton {
+  position: absolute;
+  inset: 0;
+  padding: 16px;
+}
+.v4-skel-row { display: flex; gap: 10px; margin-bottom: 10px; }
+.v4-skel-block {
+  border-radius: 6px;
+  background: #c8d2e0;
+}
+.v4-modal-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+.v4-modal-btn {
+  padding: 9px 22px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s;
+}
+.v4-modal-btn-secondary {
+  background: #fff;
+  color: #4075bf;
+  border: 1.5px solid #b8cce4;
+}
+.v4-modal-btn-secondary:hover { background: #eef3fa; }
+.v4-modal-btn-primary {
+  background: #4075bf;
+  color: #fff;
+}
+.v4-modal-btn-primary:hover { background: #3565a8; }
+
+/* V4 panel z-index overrides (above placeholder pages) */
+#v4Panel { z-index: 11; }
+#v4PanelBg { z-index: 11; }
+#v4PanelScroll { z-index: 12; }
+#v4PanelSticky { z-index: 12; }
+
+/* Analyze page */
+.v4-analyze-page {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #f0f2f5;
+  z-index: 10;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.v4-placeholder-label {
+  font-size: 28px;
+  font-weight: 700;
+  color: #c0c8d4;
+  letter-spacing: 0.5px;
+}
+
 .recipes-feature-req {
   margin-top: 18px;
   padding: 14px 16px;
@@ -1454,19 +1671,19 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
   </div>
 
   <div class="topnav-links">
-    <a class="topnav-link" href="#">
+    <a class="topnav-link" href="#" onclick="event.preventDefault();switchTab('Publish')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       Publish
     </a>
-    <a class="topnav-link" href="#">
+    <a class="topnav-link" href="#" onclick="event.preventDefault();switchTab('Discover')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
       Discover
     </a>
-    <a class="topnav-link" href="#">
+    <a class="topnav-link" href="#" onclick="event.preventDefault();switchTab('Analyze')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
       Analyze
     </a>
-    <a class="topnav-link active" href="#">
+    <a class="topnav-link active" href="#" onclick="event.preventDefault();switchTab('Social Profiles')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
       Social Profiles
     </a>
@@ -1905,6 +2122,95 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
     </button>
   </div>
 
+  <!-- V4: Right Panel (copy of V3 for independent editing) -->
+  <div class="recipes-panel" id="v4Panel"></div>
+  <div class="recipes-panel-bg" id="v4PanelBg"></div>
+  <div class="recipes-panel-scroll" id="v4PanelScroll" style="display:none">
+    <div class="recipes-panel-inner">
+      <div class="recipes-panel-header">
+        <button class="v3-panel-close" onclick="closeV4Panel()">&times;</button>
+        <h2>Start Saving 8+ Hours a Week</h2>
+        <p>Complete 3 steps and your social media runs on autopilot. Takes about 9 minutes.</p>
+        <div class="recipes-panel-person">
+          <img src="https://unavatar.io/x/claudeschneider" alt="Claude">
+          <span><strong>Claude from SmarterQueue</strong></span>
+        </div>
+      </div>
+      <div class="recipes-panel-progress">
+        <div class="progress-bar-labels">
+          <div class="progress-text"><span id="v4ProgressCount">0</span> of 3 done</div>
+          <div class="progress-time-left">About 9 min left</div>
+        </div>
+        <div class="progress-bar-bg"><div class="progress-bar-fill" id="v4ProgressFill"></div></div>
+      </div>
+
+      <div id="v4Congrats" style="display:none"></div>
+
+      <div class="recipe-card active" data-recipe="1" data-v4="1">
+        <div class="recipe-card-header" onclick="toggleCard(this.parentElement)">
+          <div class="recipe-step-num">1</div>
+          <div class="recipe-card-title">Connect your profiles</div>
+          <svg class="recipe-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="recipe-card-body">
+          <div class="recipe-card-desc">Stop logging into 4 different apps. Connect once, and every post goes out automatically. <span class="recipe-card-time"><i class="fa-regular fa-clock"></i> 3 min</span></div>
+          <div class="recipe-card-actions">
+            <button class="btn-recipe-mark" onclick="event.stopPropagation();markComplete(this.closest('.recipe-card'));updateV4Progress()">Mark complete</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-recipe="2" data-v4="1">
+        <div class="recipe-card-header" onclick="toggleCard(this.parentElement)">
+          <div class="recipe-step-num">2</div>
+          <div class="recipe-card-title">Schedule your first post</div>
+          <svg class="recipe-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="recipe-card-body">
+          <div class="recipe-card-desc">Write one post and SmarterQueue picks the perfect time. You'll see it go live — magic. <span class="recipe-card-time"><i class="fa-regular fa-clock"></i> 3 min</span></div>
+          <div class="recipe-card-actions">
+            <button class="btn-recipe-mark" onclick="event.stopPropagation();markComplete(this.closest('.recipe-card'));updateV4Progress()">Mark complete</button>
+            <a class="btn-recipe-go" href="#">Create post <span>&rsaquo;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-recipe="3" data-v4="1">
+        <div class="recipe-card-header" onclick="toggleCard(this.parentElement)">
+          <div class="recipe-step-num">3</div>
+          <div class="recipe-card-title">Find your best times to post</div>
+          <svg class="recipe-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+        </div>
+        <div class="recipe-card-body">
+          <div class="recipe-card-desc">See when your audience is online. Right-time posts get 2&ndash;3x more engagement. <span class="recipe-card-time"><i class="fa-regular fa-clock"></i> 1 min</span></div>
+          <div class="recipe-card-actions">
+            <button class="btn-recipe-mark" onclick="event.stopPropagation();markComplete(this.closest('.recipe-card'));updateV4Progress()">Mark complete</button>
+            <a class="btn-recipe-go" href="#" onclick="event.preventDefault();openV4AnalyzePage()">Analytics <span>&rsaquo;</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipes-section-divider"><span>Agency Video Guide</span></div>
+
+      <div class="v4-video-placeholder" onclick="this.classList.toggle('playing')">
+        <div class="v4-video-thumb">
+          <div class="v4-video-gradient"></div>
+          <div class="v4-video-play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+          <div class="v4-video-title">How SmarterQueue works</div>
+          <div class="v4-video-duration">2:34</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="recipes-panel-sticky" id="v4PanelSticky">
+    <button class="btn-panel-call">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7b2d8e" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+      Book your onboarding call
+    </button>
+  </div>
+
   <div class="recipes-panel" id="v5Panel"></div>
   <div class="recipes-panel-bg" id="v5PanelBg"></div>
 <div class="recipes-panel-scroll" id="v5PanelScroll" style="display:none">
@@ -2117,6 +2423,45 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
   <div style="clear:both"></div>
 </div>
 
+<!-- V4: Placeholder page for non-Social Profiles tabs -->
+<div class="v4-analyze-page" id="v4AnalyzePage">
+  <div class="v4-placeholder-label" id="v4PlaceholderLabel"></div>
+</div>
+
+<!-- V4: Analyze overlay + modal -->
+<div class="v4-analyze-overlay" id="v4AnalyzeOverlay" style="display:none">
+  <div class="v4-analyze-modal">
+    <h2>Understand Your Performance</h2>
+    <div class="v4-modal-infobox">
+      <p>Track how your content performs across platforms, with key metrics like engagement, reach, clicks, and more. Discover what's working best, and refine your strategy over time.</p>
+    </div>
+    <div class="v4-modal-video">
+      <div class="v4-modal-video-skeleton">
+        <div class="v4-skel-row">
+          <div class="v4-skel-block" style="width:45%;height:32px"></div>
+          <div class="v4-skel-block" style="width:30%;height:32px"></div>
+        </div>
+        <div class="v4-skel-row">
+          <div class="v4-skel-block" style="width:100%;height:60px"></div>
+        </div>
+        <div class="v4-skel-row">
+          <div class="v4-skel-block" style="width:65%;height:14px"></div>
+        </div>
+        <div class="v4-skel-row">
+          <div class="v4-skel-block" style="width:50%;height:14px"></div>
+        </div>
+      </div>
+      <div class="v4-modal-video-play">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </div>
+    <div class="v4-modal-actions">
+      <button class="v4-modal-btn v4-modal-btn-secondary" onclick="closeV4AnalyzePage()">Learn More</button>
+      <button class="v4-modal-btn v4-modal-btn-primary" onclick="closeV4AnalyzePage()">Done</button>
+    </div>
+  </div>
+</div>
+
 <!-- Bottom Right Actions -->
 <div class="bottom-actions">
   <!-- V2 trigger pill (hidden until v2 mode + collapsed) -->
@@ -2127,6 +2472,19 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
         <circle class="v2-ring-fill" id="v2RingFill" cx="15" cy="15" r="12"/>
       </svg>
       <div class="v2-ring-text" id="v2RingText">0/3</div>
+    </div>
+    <div class="v2-trigger-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+    <span class="v2-trigger-label">Setup Guide</span>
+  </div>
+
+  <!-- V4 trigger pill (hidden until v4 mode + collapsed) -->
+  <div class="v2-trigger" id="v4Trigger" onclick="openV4Panel()">
+    <div class="v2-ring-wrap">
+      <svg viewBox="0 0 30 30">
+        <circle class="v2-ring-bg" cx="15" cy="15" r="12"/>
+        <circle class="v2-ring-fill" id="v4RingFill" cx="15" cy="15" r="12"/>
+      </svg>
+      <div class="v2-ring-text" id="v4RingText">0/3</div>
     </div>
     <div class="v2-trigger-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
     <span class="v2-trigger-label">Setup Guide</span>
@@ -2376,6 +2734,7 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
   <button class="active" data-version="v2">v1</button>
   <button data-version="v3">v2</button>
   <button data-version="v5">v3</button>
+  <button data-version="v4">v4</button>
 </div>
 
 <script>
@@ -2465,6 +2824,11 @@ function switchVersion(version) {
   var bar = document.getElementById('onboardingBar');
   var callBtn = document.querySelector('.btn-onboarding-call');
 
+  var v4Panel = document.getElementById('v4Panel');
+  var v4PanelBg = document.getElementById('v4PanelBg');
+  var v4PanelScroll = document.getElementById('v4PanelScroll');
+  var v4PanelSticky = document.getElementById('v4PanelSticky');
+
   var v5Panel = document.getElementById('v5Panel');
   var v5PanelBg = document.getElementById('v5PanelBg');
   var v5PanelScroll = document.getElementById('v5PanelScroll');
@@ -2472,6 +2836,7 @@ function switchVersion(version) {
 
   // Reset all
   document.getElementById('v2Trigger').style.display = 'none';
+  document.getElementById('v4Trigger').style.display = 'none';
   document.getElementById('v2Expanded').style.display = 'none';
   document.getElementById('v2Expanded').classList.remove('all-done');
   document.getElementById('v2Congrats').style.display = 'none';
@@ -2479,6 +2844,10 @@ function switchVersion(version) {
   panelBg.style.display = 'none';
   panelScroll.style.display = 'none';
   panelSticky.style.display = 'none';
+  v4Panel.style.display = 'none';
+  v4PanelBg.style.display = 'none';
+  v4PanelScroll.style.display = 'none';
+  v4PanelSticky.style.display = 'none';
   v5Panel.style.display = 'none';
   v5PanelBg.style.display = 'none';
   v5PanelScroll.style.display = 'none';
@@ -2511,11 +2880,13 @@ function switchVersion(version) {
   }
 
   if (version === 'v4') {
-    // Bottom onboarding bar + corner widget
-    bar.style.display = 'block';
-    document.getElementById('v2Trigger').style.display = 'flex';
-    document.body.classList.add('has-onboarding-bar');
-    callBtn.style.display = 'none'; // CTA is in bottom bar
+    // Full-height right panel (copy of v3 for independent editing)
+    v4Panel.style.display = 'block';
+    v4PanelBg.style.display = 'block';
+    v4PanelScroll.style.display = 'block';
+    v4PanelSticky.style.display = 'block';
+    callBtn.style.display = 'none';
+    document.body.classList.add('has-v3-panel');
   }
 
   if (version === 'v5') {
@@ -2538,12 +2909,135 @@ function closeV3Panel() {
   document.body.classList.remove('has-v3-panel');
 }
 
+function closeV4Panel() {
+  document.getElementById('v4Panel').style.display = 'none';
+  document.getElementById('v4PanelBg').style.display = 'none';
+  document.getElementById('v4PanelScroll').style.display = 'none';
+  document.getElementById('v4PanelSticky').style.display = 'none';
+  document.body.classList.remove('has-v3-panel');
+  // Show trigger pill with animation
+  var trigger = document.getElementById('v4Trigger');
+  trigger.style.display = 'flex';
+  trigger.classList.add('trigger-in');
+  trigger.addEventListener('animationend', function h() {
+    trigger.removeEventListener('animationend', h);
+    trigger.classList.remove('trigger-in');
+  });
+}
+
+function openV4Panel() {
+  var trigger = document.getElementById('v4Trigger');
+  // After completion, trigger becomes "Book your onboarding call" — do nothing
+  if (trigger.classList.contains('completed')) return;
+  trigger.style.display = 'none';
+  document.getElementById('v4Panel').style.display = 'block';
+  document.getElementById('v4PanelBg').style.display = 'block';
+  document.getElementById('v4PanelScroll').style.display = 'block';
+  document.getElementById('v4PanelSticky').style.display = 'block';
+  document.body.classList.add('has-v3-panel');
+}
+
+function switchTab(name) {
+  // Update active nav link
+  document.querySelectorAll('.topnav-link').forEach(function(l) { l.classList.remove('active'); });
+  document.querySelectorAll('.topnav-link').forEach(function(l) {
+    if (l.textContent.trim() === name) l.classList.add('active');
+  });
+  var page = document.getElementById('v4AnalyzePage');
+  var overlay = document.getElementById('v4AnalyzeOverlay');
+  overlay.style.display = 'none';
+  if (name === 'Social Profiles') {
+    page.style.display = 'none';
+  } else {
+    document.getElementById('v4PlaceholderLabel').textContent = name;
+    page.style.display = 'flex';
+  }
+}
+
+function openV4AnalyzePage() {
+  switchTab('Analyze');
+  document.getElementById('v4AnalyzeOverlay').style.display = 'flex';
+}
+
+function closeV4AnalyzePage() {
+  document.getElementById('v4AnalyzeOverlay').style.display = 'none';
+}
+
 function closeV5Panel() {
   document.getElementById('v5Panel').style.display = 'none';
   document.getElementById('v5PanelBg').style.display = 'none';
   document.getElementById('v5PanelScroll').style.display = 'none';
   document.getElementById('v5PanelSticky').style.display = 'none';
   document.body.classList.remove('has-v3-panel');
+}
+
+function updateV4Progress() {
+  var scroll = document.getElementById('v4PanelScroll');
+  var cards = scroll.querySelectorAll('.recipe-card[data-v4]:not(.recipe-card-bonus)');
+  var done = 0;
+  var total = cards.length; // 3
+  cards.forEach(function(c) { if (c.classList.contains('completed')) done++; });
+  if (done > total) done = total;
+  var countEl = document.getElementById('v4ProgressCount');
+  var fillEl = document.getElementById('v4ProgressFill');
+  if (countEl) countEl.textContent = done;
+  if (fillEl) fillEl.style.width = ((done / total) * 100) + '%';
+  var timeEl = scroll.querySelector('.progress-time-left');
+  if (timeEl) timeEl.textContent = done >= total ? 'Done!' : 'About ' + ((total - done) * 3) + ' min left';
+  // Update trigger pill ring
+  var ringText = document.getElementById('v4RingText');
+  var ringFill = document.getElementById('v4RingFill');
+  if (ringText) ringText.textContent = done + '/' + total;
+  if (ringFill) {
+    var circumference = 2 * Math.PI * 12;
+    ringFill.style.strokeDashoffset = circumference - (done / total) * circumference;
+  }
+  // Completed state on trigger
+  var v4Trig = document.getElementById('v4Trigger');
+  if (done >= total) v4Trig.classList.add('completed');
+  else v4Trig.classList.remove('completed');
+
+  if (done >= total && !scroll.classList.contains('all-done')) {
+    scroll.classList.add('all-done');
+    scroll.querySelectorAll('.recipe-card.active').forEach(function(c) { c.classList.remove('active'); });
+    // Fade out panel simultaneously with confetti
+    var panel = document.getElementById('v4Panel');
+    var panelBg = document.getElementById('v4PanelBg');
+    var panelSticky = document.getElementById('v4PanelSticky');
+    scroll.style.transition = 'opacity 0.8s ease-out';
+    panelBg.style.transition = 'opacity 0.8s ease-out';
+    panelSticky.style.transition = 'opacity 0.8s ease-out';
+    scroll.style.opacity = '0';
+    panelBg.style.opacity = '0';
+    panelSticky.style.opacity = '0';
+    fireConfetti();
+    setTimeout(function() {
+      panel.style.display = 'none';
+      panelBg.style.display = 'none';
+      scroll.style.display = 'none';
+      panelSticky.style.display = 'none';
+      document.body.classList.remove('has-v3-panel');
+      // Show "Book your onboarding call" pill
+      var trigger = document.getElementById('v4Trigger');
+      trigger.classList.add('completed');
+      trigger.style.display = 'flex';
+      trigger.classList.add('trigger-in');
+      // Change label to "Book your onboarding call"
+      var trigLabel = trigger.querySelector('.v2-trigger-label');
+      if (trigLabel) trigLabel.textContent = 'Book your onboarding call';
+      trigger.addEventListener('animationend', function h() {
+        trigger.removeEventListener('animationend', h);
+        trigger.classList.remove('trigger-in');
+      });
+      // Reset opacity for reopening
+      scroll.style.opacity = '';
+      panelBg.style.opacity = '';
+      panelSticky.style.opacity = '';
+      scroll.style.transition = '';
+      panelBg.style.transition = '';
+      panelSticky.style.transition = '';
+    }, 850);
+  }
 }
 
 function updateV5Progress() {
