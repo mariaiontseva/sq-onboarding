@@ -1371,6 +1371,168 @@ body {
 #v4PanelScroll { z-index: 12; }
 #v4PanelSticky { z-index: 12; }
 
+/* ===== V4 (v1) FONT SIZE OVERRIDES — base 16 / small 14 / xs 12 ===== */
+#v4PanelScroll .recipes-panel-header h2 {
+  font-size: 22px;
+  letter-spacing: -0.4px;
+}
+#v4PanelScroll .recipes-panel-header p {
+  font-size: 14px;
+  line-height: 1.5;
+}
+#v4PanelScroll .recipes-panel-person span {
+  font-size: 14px;
+}
+#v4PanelScroll .progress-text {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+@keyframes v4Pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(174, 57, 198, 0.45); }
+  50% { box-shadow: 0 0 0 5px rgba(174, 57, 198, 0); }
+}
+.v4-progress-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #AE39C6;
+  display: inline-block;
+  flex-shrink: 0;
+  animation: v4Pulse 2s ease-in-out infinite;
+}
+#v4PanelScroll .progress-time-left {
+  font-size: 13px;
+}
+#v4PanelScroll .recipe-card-title {
+  font-size: 16px;
+}
+#v4PanelScroll .recipe-step-num {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  font-size: 14px;
+}
+#v4PanelScroll .recipe-card-header {
+  gap: 12px;
+  padding: 13px 14px;
+}
+#v4PanelScroll .recipe-card-desc {
+  font-size: 14px;
+  line-height: 1.55;
+}
+#v4PanelScroll .recipe-card-desc .recipe-card-time {
+  font-size: 12px;
+}
+#v4PanelScroll .btn-recipe-mark {
+  font-size: 13px;
+  padding: 5px 12px;
+}
+#v4PanelScroll .btn-recipe-go {
+  font-size: 14px;
+}
+#v4PanelScroll .btn-recipe-go span {
+  font-size: 16px;
+}
+#v4PanelScroll .recipes-section-divider span {
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+#v4PanelScroll .recipes-feature-req-title {
+  font-size: 14px;
+}
+#v4PanelScroll .recipes-feature-req-desc {
+  font-size: 13px;
+  line-height: 1.45;
+}
+#v4PanelScroll .recipes-feature-req-btn {
+  font-size: 13px;
+  padding: 6px 14px;
+}
+#v4PanelScroll .v4-video-title {
+  font-size: 14px;
+}
+#v4PanelScroll .v4-video-duration {
+  font-size: 12px;
+}
+#v4PanelSticky .btn-panel-call {
+  font-size: 14px;
+  height: 42px;
+}
+#v4PanelScroll .v3-panel-close {
+  top: -2px;
+  right: -4px;
+  font-size: 22px;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+#v4PanelScroll .v3-panel-close:hover {
+  background: #f0f2f5;
+}
+#v4PanelScroll .recipes-panel-header h2 {
+  padding-right: 32px;
+}
+
+/* ===== V4 PANEL ENTRANCE ANIMATION ===== */
+@keyframes v4SlideIn {
+  from { transform: translateX(328px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes v4FadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Persistent left accent + glow — full height including sticky */
+#v4PanelBg {
+  border-left: 3px solid #AE39C6;
+  box-shadow: -6px 0 24px rgba(174, 57, 198, 0.1);
+}
+#v4PanelSticky {
+  border-left: 3px solid #AE39C6;
+}
+
+/* Smooth entrance */
+#v4PanelBg.v4-entering {
+  animation: v4SlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+#v4PanelScroll.v4-entering {
+  animation: v4SlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+#v4PanelSticky.v4-entering {
+  animation: v4SlideIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+  opacity: 0;
+}
+
+/* Staggered content fade-up */
+#v4PanelScroll.v4-entering .recipes-panel-header {
+  animation: v4FadeUp 0.45s ease-out 0.2s both;
+}
+#v4PanelScroll.v4-entering .recipes-panel-progress {
+  animation: v4FadeUp 0.45s ease-out 0.3s both;
+}
+#v4PanelScroll.v4-entering .recipe-card:nth-child(1) {
+  animation: v4FadeUp 0.4s ease-out 0.35s both;
+}
+#v4PanelScroll.v4-entering .recipe-card:nth-child(2) {
+  animation: v4FadeUp 0.4s ease-out 0.42s both;
+}
+#v4PanelScroll.v4-entering .recipe-card:nth-child(3) {
+  animation: v4FadeUp 0.4s ease-out 0.49s both;
+}
+#v4PanelScroll.v4-entering .recipes-section-divider {
+  animation: v4FadeUp 0.4s ease-out 0.54s both;
+}
+#v4PanelScroll.v4-entering .v4-video-placeholder {
+  animation: v4FadeUp 0.4s ease-out 0.58s both;
+}
+
 /* Analyze page */
 .v4-analyze-page {
   position: fixed;
@@ -2129,7 +2291,7 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
     <div class="recipes-panel-inner">
       <div class="recipes-panel-header">
         <button class="v3-panel-close" onclick="closeV4Panel()">&times;</button>
-        <h2>Start Saving 8+ Hours a Week</h2>
+        <h2>Save 8+ Hours a Week</h2>
         <p>Complete 3 steps and your social media runs on autopilot. Takes about 9 minutes.</p>
         <div class="recipes-panel-person">
           <img src="https://unavatar.io/x/claudeschneider" alt="Claude">
@@ -2138,7 +2300,7 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
       </div>
       <div class="recipes-panel-progress">
         <div class="progress-bar-labels">
-          <div class="progress-text"><span id="v4ProgressCount">0</span> of 3 done</div>
+          <div class="progress-text"><span class="v4-progress-dot"></span><span id="v4ProgressCount">0</span> of 3 done</div>
           <div class="progress-time-left">About 9 min left</div>
         </div>
         <div class="progress-bar-bg"><div class="progress-bar-fill" id="v4ProgressFill"></div></div>
@@ -2178,7 +2340,7 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
       <div class="recipe-card" data-recipe="3" data-v4="1">
         <div class="recipe-card-header" onclick="toggleCard(this.parentElement)">
           <div class="recipe-step-num">3</div>
-          <div class="recipe-card-title">Find your best times to post</div>
+          <div class="recipe-card-title">Find best times to post</div>
           <svg class="recipe-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
         </div>
         <div class="recipe-card-body">
@@ -2731,10 +2893,10 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
 
 <!-- Prototype Switcher -->
 <div class="proto-switcher">
-  <button class="active" data-version="v2">v1</button>
-  <button data-version="v3">v2</button>
-  <button data-version="v5">v3</button>
-  <button data-version="v4">v4</button>
+  <button class="active" data-version="v4">v1</button>
+  <button data-version="v2">v2</button>
+  <button data-version="v3">v3</button>
+  <button data-version="v5">v4</button>
 </div>
 
 <script>
@@ -2887,6 +3049,14 @@ function switchVersion(version) {
     v4PanelSticky.style.display = 'block';
     callBtn.style.display = 'none';
     document.body.classList.add('has-v3-panel');
+    // Trigger slide-in animation
+    v4PanelBg.classList.remove('v4-entering');
+    v4PanelScroll.classList.remove('v4-entering');
+    v4PanelSticky.classList.remove('v4-entering');
+    void v4PanelBg.offsetWidth; // force reflow
+    v4PanelBg.classList.add('v4-entering');
+    v4PanelScroll.classList.add('v4-entering');
+    v4PanelSticky.classList.add('v4-entering');
   }
 
   if (version === 'v5') {
