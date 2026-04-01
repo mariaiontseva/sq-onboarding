@@ -4367,10 +4367,32 @@ function openMobFloat() {
 }
 
 // Auto-init: KYC hidden, show onboarding directly
-if (window.innerWidth < 768) {
-  initMobileOnboarding();
-} else {
-  switchVersion('v4');
+var currentMode = null;
+function applyMode() {
+  var isMobile = window.innerWidth < 768;
+  var newMode = isMobile ? 'mobile' : 'desktop';
+  if (newMode === currentMode) return;
+  currentMode = newMode;
+  if (isMobile) {
+    // Hide desktop panel
+    switchVersion('v1'); // resets all desktop panels
+    initMobileOnboarding();
+  } else {
+    // Hide mobile, show desktop
+    document.body.classList.remove('mob-onboarding');
+    document.getElementById('mobSheet').style.display = 'none';
+    document.getElementById('mobFloat').style.display = 'none';
+    document.getElementById('mobFab').style.display = 'none';
+    switchVersion('v4');
+  }
+}
+applyMode();
+window.addEventListener('resize', applyMode);
+
+// Confetti from v3 redirect
+if (window.location.search.indexOf('confetti=1') !== -1) {
+  setTimeout(fireConfetti, 600);
+  history.replaceState(null, '', window.location.pathname);
 }
 </script>
 
