@@ -1816,6 +1816,591 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
   background: #e04cf0;
   color: #fff;
 }
+
+/* ===== KYC OVERLAY ===== */
+.kyc-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #1e3254;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease;
+}
+.kyc-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.kyc-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 0;
+  max-width: 700px;
+  width: 92%;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+  position: relative;
+  overflow: hidden;
+}
+.kyc-card-inner {
+  padding: 40px 44px 32px;
+}
+.kyc-step {
+  display: none;
+  animation: kyc-step-in 0.3s ease both;
+}
+.kyc-step.active { display: block; }
+@keyframes kyc-step-in {
+  from { opacity: 0; transform: translateX(16px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.kyc-step.slide-out {
+  animation: kyc-step-out 0.2s ease both;
+}
+@keyframes kyc-step-out {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-16px); }
+}
+.kyc-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.kyc-brand-mark {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, #00b4d8, #4a90d9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: -0.5px;
+  flex-shrink: 0;
+}
+.kyc-brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: #072653;
+  letter-spacing: -0.2px;
+}
+.kyc-step-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: #7b8faa;
+  margin-bottom: 8px;
+}
+.kyc-title {
+  font-size: 26px;
+  font-weight: 700;
+  color: #072653;
+  margin-bottom: 6px;
+  line-height: 1.3;
+  letter-spacing: -0.3px;
+}
+.kyc-subtitle {
+  font-size: 15px;
+  color: #7b8faa;
+  margin-bottom: 26px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+.kyc-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.kyc-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: #fff;
+}
+.kyc-option:hover {
+  border-color: #4075bf;
+  background: #f7faff;
+}
+.kyc-option.selected {
+  border-color: #4075bf;
+  background: #f0f5ff;
+}
+.kyc-option-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #f0f4f9;
+  border-radius: 9px;
+  color: #4075bf;
+  font-size: 15px;
+  transition: background 0.15s, color 0.15s;
+}
+.kyc-option.selected .kyc-option-icon {
+  background: #4075bf;
+  color: #fff;
+}
+.kyc-option-text strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #072653;
+  line-height: 1.3;
+}
+.kyc-option-text span {
+  display: block;
+  font-size: 12.5px;
+  color: #94a3b8;
+  font-weight: 400;
+  margin-top: 1px;
+}
+.kyc-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.kyc-goal {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  color: #072653;
+  line-height: 1.4;
+}
+.kyc-goal::before {
+  content: '';
+  width: 18px; height: 18px;
+  border: 2px solid #d0d8e4;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  box-sizing: border-box;
+}
+.kyc-goal:hover {
+  border-color: #4075bf;
+  background: #f7faff;
+}
+.kyc-goal:hover::before { border-color: #4075bf; }
+.kyc-goal.selected {
+  border-color: #4075bf;
+  background: #f0f5ff;
+}
+.kyc-goal.selected::before {
+  border-color: #4075bf;
+  background: #4075bf;
+  box-shadow: inset 0 0 0 2.5px #fff;
+}
+.kyc-goal .kyc-badge {
+  background: #072653;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-left: auto;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+.kyc-persona-info {
+  font-size: 13px;
+  color: #94a3b8;
+  margin-top: 18px;
+}
+.kyc-persona-info strong { color: #072653; font-weight: 600; }
+.kyc-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 28px;
+}
+.kyc-dots {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex: 1;
+}
+.kyc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d0d8e4;
+  transition: all 0.3s ease;
+}
+.kyc-dot.active {
+  background: #4075bf;
+  width: 24px;
+  border-radius: 4px;
+}
+.kyc-btn-back {
+  border: 1.5px solid #d0d8e4;
+  background: #fff;
+  color: #4075bf;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  min-width: 100px;
+}
+.kyc-btn-back:hover { border-color: #4075bf; }
+.kyc-btn-continue {
+  background: #c2cdd9;
+  color: #fff;
+  border: none;
+  padding: 10px 28px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: not-allowed;
+  transition: all 0.15s;
+  min-width: 100px;
+}
+.kyc-btn-continue.enabled {
+  background: #4075bf;
+  cursor: pointer;
+}
+.kyc-btn-continue.enabled:hover { background: #345fa0; }
+
+/* ===== KYC MOBILE ===== */
+@media (max-width: 767px) {
+  .kyc-overlay { background: #fff; align-items: stretch; }
+  .kyc-card {
+    max-width: none; width: 100%; border-radius: 0;
+    box-shadow: none; display: flex; flex-direction: column; height: 100%;
+  }
+  .kyc-card-inner {
+    padding: 0; display: flex; flex-direction: column; height: 100%;
+  }
+  .kyc-step {
+    display: none; flex-direction: column; height: 100%;
+  }
+  .kyc-step.active { display: flex; }
+  /* Sticky top: logo + step */
+  .kyc-brand { display: none; }
+  .kyc-step-label { padding: 16px 20px 0; margin-bottom: 6px; }
+  /* Scrollable content */
+  .kyc-title { padding: 0 20px; font-size: 22px; margin-bottom: 4px; }
+  .kyc-subtitle { padding: 0 20px; font-size: 14px; margin-bottom: 16px; }
+  .kyc-grid {
+    padding: 0 20px; flex: 1; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    align-content: start;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .kyc-option { padding: 12px 14px; gap: 12px; }
+  .kyc-option-icon { width: 32px; height: 32px; font-size: 14px; }
+  .kyc-option-text strong { font-size: 13px; }
+  .kyc-option-text span { font-size: 11.5px; }
+  .kyc-goals {
+    padding: 0 20px; flex: 1; overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .kyc-goal { padding: 14px 16px; font-size: 14px; }
+  .kyc-persona-info { display: none; }
+  /* Sticky bottom bar */
+  .kyc-bottom {
+    position: sticky; bottom: 0; margin-top: auto;
+    padding: 12px 20px; background: #fff;
+    border-top: 1px solid #edf0f5;
+    flex-shrink: 0;
+  }
+  .kyc-btn-back, .kyc-btn-continue {
+    height: 40px; padding: 0 24px; font-size: 15px;
+  }
+
+  /* Layout: hide sidebar, fullwidth main */
+  .sidebar, .sidebar-bg { display: none !important; }
+  .topnav-links, .topnav-org, .topnav-right { display: none; }
+  .topnav { padding: 0 12px; }
+  .main { padding: 16px; max-width: none; }
+  .page-title { font-size: 18px; }
+}
+
+/* ===== MOBILE ONBOARDING ===== */
+.mob-switcher {
+  display: none;
+  position: fixed;
+  top: 14px;
+  right: 12px;
+  z-index: 200;
+  background: #111;
+  border-radius: 6px;
+  padding: 2px;
+  gap: 2px;
+}
+.mob-switcher button {
+  padding: 5px 12px;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.45);
+  border-radius: 4px;
+  cursor: pointer;
+}
+.mob-switcher button.active {
+  background: #fff;
+  color: #111;
+}
+.mob-sheet, .mob-float, .mob-fab { display: none; }
+
+@media (max-width: 767px) {
+  #v4Panel, #v4PanelBg, #v4PanelScroll, #v4PanelSticky,
+  #recipesPanel, #recipesPanelBg, #recipesPanelScroll, #recipesPanelSticky {
+    display: none !important;
+  }
+  body.has-v3-panel .main { margin-right: 0; }
+  body.has-v3-panel .bottom-actions { right: 16px; }
+  body.mob-onboarding .mob-switcher { display: flex; }
+
+  /* v1: BOTTOM SHEET */
+  .mob-sheet {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 150;
+    background: #fff;
+    border-radius: 14px 14px 0 0;
+    border-top: 3px solid #AE39C6;
+    box-shadow: 0 -4px 24px rgba(7,38,83,0.15);
+    transform: translateY(100%);
+    max-height: none;
+  }
+  body.mob-onboarding .mob-sheet.mob-active { display: block; }
+  .mob-sheet.mob-active { transform: translateY(100%); }
+  .mob-sheet.slide-in { animation: mob-sheet-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  @keyframes mob-sheet-up {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+  .mob-sheet.collapsed,
+  .mob-sheet.expanded { transform: translateY(0); }
+  .mob-sheet-handle {
+    width: 32px; height: 4px;
+    background: #d0d8e4;
+    border-radius: 2px;
+    margin: 6px auto 0;
+    cursor: pointer;
+  }
+  /* Collapsed: current step inline */
+  .mob-sheet-collapsed {
+    display: flex;
+    align-items: center;
+    padding: 10px 16px 20px;
+    gap: 10px;
+    cursor: pointer;
+    max-height: 56px;
+    overflow: hidden;
+    opacity: 1;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mob-sheet.expanded .mob-sheet-collapsed {
+    max-height: 0; opacity: 0;
+    padding-top: 0; padding-bottom: 0;
+  }
+  .mob-sheet-c-num {
+    width: 28px; height: 28px;
+    background: #f5ecfa;
+    color: #AE39C6;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .mob-sheet-c-body { flex: 1; min-width: 0; }
+  .mob-sheet-c-title {
+    font-size: 15px; font-weight: 600; color: #072653;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .mob-sheet-c-meta { font-size: 14px; color: #AE39C6; margin-top: 1px; }
+  .mob-sheet-c-progress { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+  .mob-sheet-c-bar { width: 40px; height: 4px; background: #f0e4f5; border-radius: 2px; overflow: hidden; }
+  .mob-sheet-c-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #AE39C6, #d06ce8); border-radius: 2px; transition: width 0.4s ease; }
+  .mob-sheet-c-count { font-size: 14px; font-weight: 600; color: #AE39C6; }
+  .mob-sheet-c-expand {
+    width: 28px; height: 28px;
+    border: 1.5px solid #dcc0e8; background: #faf5fd; border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: #AE39C6; cursor: pointer;
+  }
+  /* Expanded */
+  .mob-sheet-expand-area {
+    max-height: 0; overflow: hidden; opacity: 0; padding: 0 16px;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease, padding 0.35s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mob-sheet.expanded .mob-sheet-expand-area {
+    max-height: none; overflow: visible; opacity: 1; padding: 4px 16px 16px;
+  }
+  .mob-sheet-exp-header {
+    display: flex; align-items: center; padding: 0 0 6px; gap: 8px;
+  }
+  .mob-sheet-exp-done {
+    display: flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: #072653;
+  }
+  .mob-sheet-exp-done::before {
+    content: ''; width: 8px; height: 8px;
+    background: #AE39C6; border-radius: 50%; flex-shrink: 0;
+  }
+  .mob-sheet-exp-time { font-size: 13px; color: #94a3b8; margin-left: auto; }
+  .mob-sheet-exp-close {
+    width: 28px; height: 28px;
+    background: #f5ecfa; border: 1.5px solid #dcc0e8; border-radius: 6px;
+    color: #AE39C6; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mob-sheet-bar {
+    height: 4px; background: #edf0f5; border-radius: 2px; overflow: hidden; margin-bottom: 10px;
+  }
+  .mob-sheet-bar-fill {
+    height: 100%; width: 0%;
+    background: linear-gradient(90deg, #AE39C6, #d06ce8);
+    border-radius: 3px; transition: width 0.4s ease;
+  }
+  /* Sheet cards */
+  .mob-s-card {
+    border: 1px solid #e8ecf2; border-radius: 10px; margin-bottom: 6px;
+    background: #fff; transition: border-color 0.2s, background 0.2s;
+  }
+  .mob-s-card.active { border-color: #d06ce8; background: #fdfbfe; }
+  .mob-s-card.completed { border-color: #e8ecf2; opacity: 0.5; }
+  .mob-s-card-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 12px; cursor: pointer;
+  }
+  .mob-s-num {
+    width: 26px; height: 26px;
+    background: #f5ecfa; color: #AE39C6; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+  }
+  .mob-s-card.completed .mob-s-num { background: #AE39C6; color: #fff; }
+  .mob-s-card-title {
+    font-size: 14px; font-weight: 600; color: #072653; flex: 1; line-height: 1.3;
+  }
+  .mob-s-card.completed .mob-s-card-title { text-decoration: line-through; color: #a3b1c3; }
+  .mob-s-card-chevron {
+    width: 16px; height: 16px; color: #c2cdd9; flex-shrink: 0;
+    transition: transform 0.25s, color 0.2s;
+  }
+  .mob-s-card.active .mob-s-card-chevron { transform: rotate(180deg); color: #AE39C6; }
+  .mob-s-card-body {
+    display: grid; grid-template-rows: 0fr; overflow: hidden;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mob-s-card.active .mob-s-card-body { grid-template-rows: 1fr; }
+  .mob-s-card-inner {
+    min-height: 0; padding: 0 12px 0 48px; overflow: hidden;
+    transition: padding 0.3s cubic-bezier(0.4,0,0.2,1);
+  }
+  .mob-s-card.active .mob-s-card-inner { padding: 0 12px 12px 48px; }
+  .mob-s-card-desc { font-size: 13px; color: #6b7c8f; line-height: 1.45; margin-bottom: 4px; }
+  .mob-s-card-time {
+    display: inline; color: #AE39C6; font-size: 11px; font-weight: 500;
+  }
+  .mob-s-card-time i { font-size: 10px; margin-right: 2px; }
+  .mob-s-actions { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+  .mob-s-mark {
+    padding: 4px 10px; background: none; color: #AE39C6;
+    border: 1.5px solid #dcc0e8; border-radius: 6px;
+    font-family: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+  }
+  .mob-s-mark:hover { background: #faf5fd; }
+  .mob-s-desktop-icon { color: #94a3b8; font-size: 11px; margin-right: 4px; }
+  .mob-s-desktop-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 600; color: #7b8faa;
+    background: #f0f4f9; border-radius: 4px; padding: 4px 8px; margin-top: 6px;
+  }
+  .mob-s-desktop-badge i { font-size: 10px; }
+  .mob-s-congrats {
+    text-align: center; padding: 16px 12px; margin-bottom: 8px;
+    background: linear-gradient(135deg, #faf5fd, #f0f0ff);
+    border-radius: 12px; border: 1px solid #e8ddf0;
+  }
+  .mob-s-congrats-icon {
+    width: 36px; height: 36px; margin: 0 auto 8px;
+    background: #AE39C6; color: #fff; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: 16px;
+  }
+  .mob-s-congrats-title { font-size: 15px; font-weight: 700; color: #072653; margin-bottom: 4px; }
+  .mob-s-congrats-desc { font-size: 13px; color: #6b7c8f; line-height: 1.45; }
+  .mob-s-go { font-size: 14px; color: #AE39C6; font-weight: 600; text-decoration: none; }
+
+  /* v2: FLOATING CARD */
+  .mob-float {
+    position: fixed; bottom: 16px; left: 12px; right: 12px; z-index: 150;
+    background: #fff; border-radius: 16px;
+    border-top: 3px solid #AE39C6;
+    box-shadow: 0 4px 24px rgba(7,38,83,0.15);
+    overflow: hidden; transition: opacity 0.25s, transform 0.25s;
+  }
+  body.mob-onboarding .mob-float.mob-active { display: block; }
+  .mob-float.mob-hidden { opacity: 0; transform: translateY(20px); pointer-events: none; }
+  .mob-float-progress { height: 3px; background: #f0e4f5; border-radius: 2px; margin-bottom: 12px; }
+  .mob-float-progress-fill { height: 100%; background: linear-gradient(90deg, #AE39C6, #d06ce8); border-radius: 2px; transition: width 0.4s ease; width: 0%; }
+  .mob-float-inner { padding: 14px 16px 16px; }
+  .mob-float-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .mob-float-top-left { display: flex; align-items: center; gap: 8px; }
+  .mob-float-num {
+    width: 24px; height: 24px;
+    background: #f5ecfa; color: #AE39C6; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; flex-shrink: 0;
+  }
+  .mob-float-step { font-size: 14px; font-weight: 600; color: #AE39C6; }
+  .mob-float-close {
+    width: 28px; height: 28px;
+    background: #f5ecfa; border: 1.5px solid #dcc0e8; border-radius: 6px;
+    color: #AE39C6; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .mob-float-title { font-size: 16px; font-weight: 700; color: #072653; margin-bottom: 4px; }
+  .mob-float-desc { font-size: 14px; color: #6b7c8f; line-height: 1.5; margin-bottom: 14px; }
+  .mob-float-actions { display: flex; align-items: center; gap: 14px; }
+  .mob-float-mark {
+    padding: 8px 20px; background: none; color: #AE39C6;
+    border: 1.5px solid #dcc0e8; border-radius: 8px;
+    font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+  .mob-float-mark:hover { background: #faf5fd; }
+  .mob-float-go { font-size: 14px; color: #AE39C6; font-weight: 600; text-decoration: none; }
+  /* FAB */
+  /* Hide default bottom actions when v2 FAB is active */
+  body.mob-onboarding .bottom-actions .btn-onboarding-call { display: none; }
+  .mob-fab {
+    position: fixed; bottom: 24px; right: 68px; z-index: 150;
+    width: 44px; height: 44px; border-radius: 22px;
+    background: #AE39C6; color: #fff; border: none;
+    box-shadow: 0 3px 12px rgba(174,57,198,0.35);
+    cursor: pointer; font-family: inherit; font-size: 12px; font-weight: 700;
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  body.mob-onboarding .mob-fab.mob-active { display: flex; align-items: center; justify-content: center; }
+  .mob-fab.mob-hidden { opacity: 0; transform: scale(0.5); pointer-events: none; }
+}
 </style>
 </head>
 <body>
@@ -1866,6 +2451,87 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
     </div>
   </div>
 </nav>
+
+<!-- ===== KYC OVERLAY ===== -->
+<div class="kyc-overlay" id="kycOverlay" style="display:none">
+  <div class="kyc-card">
+    <div class="kyc-card-inner">
+    <div class="kyc-step active" id="kycStep1">
+      <div class="kyc-brand">
+        <div class="kyc-brand-mark">SQ</div>
+        <div class="kyc-brand-name">SmarterQueue</div>
+      </div>
+      <div class="kyc-step-label">Step 1 of 2</div>
+      <div class="kyc-title">Which describes you best?</div>
+      <div class="kyc-subtitle">We'll tailor your setup so you see the most useful things first.</div>
+      <div class="kyc-grid">
+        <div class="kyc-option" data-persona="SMM Agency / Freelancer" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-users-gear"></i></div>
+          <div class="kyc-option-text"><strong>SMM Agency / Freelancer</strong><span>Multiple clients/brands</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Business" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-building"></i></div>
+          <div class="kyc-option-text"><strong>Business</strong><span>In-house marketer</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Branches / Franchise" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-sitemap"></i></div>
+          <div class="kyc-option-text"><strong>Branches / Franchise</strong><span>Multiple locations</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Solopreneur" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-user"></i></div>
+          <div class="kyc-option-text"><strong>Solopreneur</strong><span>My own brand/business</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Content Creator" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-video"></i></div>
+          <div class="kyc-option-text"><strong>Content Creator</strong><span>Influencer / video creator</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Blogger" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-pen-nib"></i></div>
+          <div class="kyc-option-text"><strong>Blogger</strong><span>Promote my blog</span></div>
+        </div>
+        <div class="kyc-option" data-persona="High-Volume Publisher" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <div class="kyc-option-text"><strong>High-Volume Publisher</strong><span>Multiple pages at scale</span></div>
+        </div>
+        <div class="kyc-option" data-persona="Other" onclick="selectPersona(this)">
+          <div class="kyc-option-icon"><i class="fa-solid fa-ellipsis"></i></div>
+          <div class="kyc-option-text"><strong>Other</strong><span>None of the above</span></div>
+        </div>
+      </div>
+      <div class="kyc-bottom">
+        <div style="min-width:100px"></div>
+        <div class="kyc-dots"><div class="kyc-dot active"></div><div class="kyc-dot"></div></div>
+        <div style="min-width:100px"></div>
+      </div>
+    </div>
+    <div class="kyc-step" id="kycStep2">
+      <div class="kyc-brand">
+        <div class="kyc-brand-mark">SQ</div>
+        <div class="kyc-brand-name">SmarterQueue</div>
+      </div>
+      <div class="kyc-step-label">Step 2 of 2</div>
+      <div class="kyc-title">What would you like to achieve first?</div>
+      <div class="kyc-subtitle">We'll give you personalized steps to help you get results faster.</div>
+      <div class="kyc-goals">
+        <div class="kyc-goal" onclick="selectGoal(this)">
+          Set up a consistent posting plan &amp; start scheduling
+          <span class="kyc-badge">RECOMMENDED</span>
+        </div>
+        <div class="kyc-goal" onclick="selectGoal(this)">Discover high-performing content in my niche to share</div>
+        <div class="kyc-goal" onclick="selectGoal(this)">Import my existing content &amp; get it publishing</div>
+        <div class="kyc-goal" onclick="selectGoal(this)">See which of my posts performed best &amp; apply those learnings</div>
+        <div class="kyc-goal" onclick="selectGoal(this)">Recycle my best posts automatically for ongoing engagement</div>
+      </div>
+      <div class="kyc-persona-info">Persona selected: <strong id="kycPersonaLabel"></strong></div>
+      <div class="kyc-bottom">
+        <button class="kyc-btn-back" onclick="goToStep(1)">Go Back</button>
+        <div class="kyc-dots"><div class="kyc-dot"></div><div class="kyc-dot active"></div></div>
+        <button class="kyc-btn-continue" id="kycContinueBtn" onclick="finishKyc()">Continue</button>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
 
 <!-- ===== LAYOUT ===== -->
 <div class="layout">
@@ -2890,8 +3556,106 @@ body.has-onboarding-bar .recipes-widget { bottom: 216px; }
   </div>
 </div>
 
-<!-- Prototype Switcher -->
-<div class="proto-switcher">
+<!-- ===== MOBILE ONBOARDING ===== -->
+<div class="mob-switcher" id="mobSwitcher">
+  <button class="active" data-mob="sheet">v1</button>
+  <button data-mob="float">v2</button>
+</div>
+
+<!-- Mobile v1: Bottom Sheet -->
+<div class="mob-sheet expanded mob-active" id="mobSheet" style="display:none">
+  <div class="mob-sheet-handle" onclick="toggleMobSheet()"></div>
+  <div class="mob-sheet-collapsed" onclick="toggleMobSheet()">
+    <div class="mob-sheet-c-num" id="mobSheetCNum">1</div>
+    <div class="mob-sheet-c-body">
+      <div class="mob-sheet-c-title" id="mobSheetCTitle">Connect your profiles</div>
+      <div class="mob-sheet-c-meta">Next step &middot; <span id="mobSheetCTime">3 min</span></div>
+    </div>
+    <div class="mob-sheet-c-progress">
+      <div class="mob-sheet-c-bar"><div class="mob-sheet-c-bar-fill" id="mobSheetCFill"></div></div>
+      <div class="mob-sheet-c-count" id="mobSheetCCount">0/3</div>
+    </div>
+    <div class="mob-sheet-c-expand">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </div>
+  </div>
+  <div class="mob-sheet-expand-area">
+    <div class="mob-sheet-exp-header">
+      <div class="mob-sheet-exp-done"><span id="mobSheetCount">0</span> of 3 done</div>
+      <div class="mob-sheet-exp-time" id="mobSheetTime">About 9 min left</div>
+      <button class="mob-sheet-exp-close" onclick="toggleMobSheet()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
+    <div class="mob-sheet-bar"><div class="mob-sheet-bar-fill" id="mobSheetFill"></div></div>
+    <div class="mob-s-card active" data-mob-step="1">
+      <div class="mob-s-card-header" onclick="toggleMobCard(this.parentElement)">
+        <div class="mob-s-num">1</div>
+        <div class="mob-s-card-title">Connect your profiles</div>
+        <svg class="mob-s-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="mob-s-card-body"><div class="mob-s-card-inner">
+        <div class="mob-s-card-desc">Stop logging into 4 different apps. Connect once, and every post goes out automatically. <span class="mob-s-card-time"><i class="fa-regular fa-clock"></i> 3 min</span></div>
+        <div class="mob-s-actions">
+          <button class="mob-s-mark" onclick="event.stopPropagation();mobSheetComplete(this.closest('.mob-s-card'))">Mark complete</button>
+        </div>
+      </div></div>
+    </div>
+    <div class="mob-s-congrats" id="mobSheetCongrats" style="display:none">
+      <div class="mob-s-congrats-icon"><i class="fa-solid fa-rocket"></i></div>
+      <div class="mob-s-congrats-title">You're off to a great start!</div>
+      <div class="mob-s-congrats-desc">The next steps work best on desktop — bigger screen, drag &amp; drop, the works. Open SmarterQueue on your computer to keep going.</div>
+    </div>
+    <div class="mob-s-card" data-mob-step="2">
+      <div class="mob-s-card-header" onclick="toggleMobCard(this.parentElement)">
+        <div class="mob-s-num">2</div>
+        <div class="mob-s-card-title"><i class="fa-solid fa-desktop mob-s-desktop-icon"></i> Set your timeslots to post</div>
+        <svg class="mob-s-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="mob-s-card-body"><div class="mob-s-card-inner">
+        <div class="mob-s-card-desc">Choose the best times for each day and SmarterQueue will publish automatically. <span class="mob-s-card-time"><i class="fa-regular fa-clock"></i> 2 min</span></div>
+        <div class="mob-s-desktop-badge"><i class="fa-solid fa-desktop"></i> Best on desktop</div>
+      </div></div>
+    </div>
+    <div class="mob-s-card" data-mob-step="3">
+      <div class="mob-s-card-header" onclick="toggleMobCard(this.parentElement)">
+        <div class="mob-s-num">3</div>
+        <div class="mob-s-card-title"><i class="fa-solid fa-desktop mob-s-desktop-icon"></i> Bulk import your content</div>
+        <svg class="mob-s-card-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+      <div class="mob-s-card-body"><div class="mob-s-card-inner">
+        <div class="mob-s-card-desc">Upload a CSV or connect an RSS feed to fill your queue in seconds. <span class="mob-s-card-time"><i class="fa-regular fa-clock"></i> 2 min</span></div>
+        <div class="mob-s-desktop-badge"><i class="fa-solid fa-desktop"></i> Best on desktop</div>
+      </div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile v2: Floating Card -->
+<div class="mob-float mob-hidden" id="mobFloat" style="display:none">
+  <div class="mob-float-inner">
+    <div class="mob-float-top">
+      <div class="mob-float-top-left">
+        <div class="mob-float-num" id="mobFloatNum">1</div>
+        <div class="mob-float-step" id="mobFloatStep">Step 1 of 3</div>
+      </div>
+      <button class="mob-float-close" onclick="closeMobFloat()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </button>
+    </div>
+    <div class="mob-float-progress"><div class="mob-float-progress-fill" id="mobFloatProgressFill"></div></div>
+    <div class="mob-float-title" id="mobFloatTitle">Connect your profiles</div>
+    <div class="mob-float-desc" id="mobFloatDesc">Connect once, and every post goes out automatically.</div>
+    <div class="mob-float-actions">
+      <button class="mob-float-mark" id="mobFloatMark" onclick="mobFloatComplete()">Mark complete</button>
+      <a class="mob-float-go" id="mobFloatGo" href="#" style="display:none">Go &rsaquo;</a>
+    </div>
+  </div>
+</div>
+<button class="mob-fab mob-hidden mob-active" id="mobFab" onclick="openMobFloat()" style="display:none">0/3</button>
+
+<!-- Prototype Switcher (hidden — v1 only) -->
+<div class="proto-switcher" style="display:none">
   <button class="active" data-version="v4">v1</button>
   <button data-version="v2">v2</button>
   <button data-version="v3">v3</button>
@@ -3367,9 +4131,247 @@ document.querySelectorAll('.proto-switcher button').forEach(function(btn) {
   });
 });
 
-// Init: activate the default selected version on page load
-var activeBtn = document.querySelector('.proto-switcher button.active');
-if (activeBtn) switchVersion(activeBtn.dataset.version);
+// ===== KYC FLOW =====
+var selectedPersona = null;
+var selectedGoal = null;
+var kycTransitioning = false;
+
+function selectPersona(el) {
+  document.querySelectorAll('#kycStep1 .kyc-option').forEach(function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedPersona = el.dataset.persona;
+  setTimeout(function() { goToStep(2); }, 400);
+}
+
+function goToStep(step) {
+  if (kycTransitioning) return;
+  kycTransitioning = true;
+  var current = document.querySelector('.kyc-step.active');
+  var target = step === 1 ? document.getElementById('kycStep1') : document.getElementById('kycStep2');
+  if (current === target) { kycTransitioning = false; return; }
+  current.classList.add('slide-out');
+  setTimeout(function() {
+    current.classList.remove('active', 'slide-out');
+    target.classList.add('active');
+    if (step === 2) {
+      document.getElementById('kycPersonaLabel').textContent = selectedPersona || '';
+      updateContinueBtn();
+    }
+    kycTransitioning = false;
+  }, 250);
+}
+
+function selectGoal(el) {
+  document.querySelectorAll('#kycStep2 .kyc-goal').forEach(function(g) { g.classList.remove('selected'); });
+  el.classList.add('selected');
+  selectedGoal = true;
+  updateContinueBtn();
+}
+
+function updateContinueBtn() {
+  var btn = document.getElementById('kycContinueBtn');
+  if (selectedGoal) btn.classList.add('enabled');
+  else btn.classList.remove('enabled');
+}
+
+function finishKyc() {
+  if (!selectedGoal) return;
+  var overlay = document.getElementById('kycOverlay');
+  overlay.classList.add('hidden');
+  setTimeout(function() { overlay.style.display = 'none'; }, 500);
+  if (window.innerWidth < 768) {
+    initMobileOnboarding();
+  } else {
+    switchVersion('v4');
+  }
+}
+
+// ===== MOBILE ONBOARDING =====
+var mobSteps = [
+  { title: 'Connect your profiles', desc: 'Stop logging into 4 different apps. Connect once, and every post goes out automatically.', go: null },
+  { title: 'Set your timeslots to post', desc: 'Choose the best times for each day and SmarterQueue will publish automatically.', go: 'Posting Plan' },
+  { title: 'Bulk import your content', desc: 'Upload a CSV or connect an RSS feed to fill your queue in seconds.', go: 'Import' }
+];
+var mobDone = 0;
+var mobCurrentFloat = 0;
+var mobActiveVariant = 'sheet';
+
+function initMobileOnboarding() {
+  document.body.classList.add('mob-onboarding');
+  if (mobActiveVariant === 'sheet') {
+    var sh = document.getElementById('mobSheet');
+    sh.style.display = 'block';
+    sh.classList.add('slide-in');
+    sh.addEventListener('animationend', function h() { sh.removeEventListener('animationend', h); sh.classList.remove('slide-in'); });
+    document.getElementById('mobFloat').style.display = 'none';
+    document.getElementById('mobFab').style.display = 'none';
+  } else {
+    document.getElementById('mobSheet').style.display = 'none';
+    document.getElementById('mobFloat').style.display = 'block';
+    document.getElementById('mobFloat').classList.remove('mob-hidden');
+    document.getElementById('mobFab').style.display = 'none';
+    renderMobFloat();
+  }
+}
+
+document.querySelectorAll('.mob-switcher button').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.mob-switcher button').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    mobActiveVariant = btn.dataset.mob;
+    document.getElementById('mobSheet').style.display = 'none';
+    document.getElementById('mobFloat').style.display = 'none';
+    document.getElementById('mobFab').style.display = 'none';
+    if (mobActiveVariant === 'sheet') {
+      document.getElementById('mobSheet').style.display = 'block';
+    } else {
+      document.getElementById('mobFloat').style.display = 'block';
+      document.getElementById('mobFloat').classList.remove('mob-hidden');
+      renderMobFloat();
+    }
+  });
+});
+
+// v1: Bottom Sheet
+function toggleMobSheet() {
+  var sheet = document.getElementById('mobSheet');
+  if (sheet.classList.contains('collapsed')) {
+    sheet.classList.remove('collapsed');
+    sheet.classList.add('expanded');
+  } else {
+    sheet.classList.remove('expanded');
+    sheet.classList.add('collapsed');
+  }
+}
+
+function toggleMobCard(card) {
+  var wasActive = card.classList.contains('active');
+  var hadOtherOpen = document.querySelector('.mob-s-card.active') && !wasActive;
+  document.querySelectorAll('.mob-s-card.active').forEach(function(c) { c.classList.remove('active'); });
+  if (!wasActive) {
+    if (hadOtherOpen) {
+      setTimeout(function() { card.classList.add('active'); }, 150);
+    } else {
+      card.classList.add('active');
+    }
+  }
+}
+
+function mobSheetComplete(card) {
+  card.classList.remove('active');
+  card.classList.add('completed');
+  var num = card.querySelector('.mob-s-num');
+  num.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px"></i>';
+  mobDone++;
+  updateMobSheetProgress();
+  // Show congrats after step 1
+  if (card.getAttribute('data-mob-step') === '1') {
+    document.getElementById('mobSheetCongrats').style.display = 'block';
+  }
+  var next = card.nextElementSibling;
+  while (next && (!next.classList.contains('mob-s-card') || next.classList.contains('completed'))) {
+    next = next.nextElementSibling;
+  }
+  if (next && next.classList.contains('mob-s-card')) {
+    setTimeout(function() { next.classList.add('active'); }, 200);
+  }
+  if (mobDone >= 3) {
+    document.getElementById('mobSheet').classList.add('all-done');
+    fireConfetti();
+  }
+}
+
+function updateMobSheetProgress() {
+  var pct = ((mobDone / 3) * 100) + '%';
+  document.getElementById('mobSheetCount').textContent = mobDone;
+  document.getElementById('mobSheetFill').style.width = pct;
+  var timeEl = document.getElementById('mobSheetTime');
+  timeEl.textContent = mobDone >= 3 ? 'Done!' : 'About ' + ((3 - mobDone) * 3) + ' min left';
+  document.getElementById('mobSheetCFill').style.width = pct;
+  document.getElementById('mobSheetCCount').textContent = mobDone + '/3';
+  updateMobSheetCollapsed();
+}
+
+function updateMobSheetCollapsed() {
+  var nextCard = document.querySelector('.mob-s-card:not(.completed)');
+  if (nextCard) {
+    var step = nextCard.getAttribute('data-mob-step');
+    document.getElementById('mobSheetCNum').textContent = step;
+    document.getElementById('mobSheetCTitle').textContent = nextCard.querySelector('.mob-s-card-title').textContent;
+  } else {
+    document.getElementById('mobSheetCNum').innerHTML = '<i class="fa-solid fa-check" style="font-size:11px"></i>';
+    document.getElementById('mobSheetCNum').style.background = '#22a85b';
+    document.getElementById('mobSheetCTitle').textContent = 'All done!';
+    document.querySelector('.mob-sheet-c-meta').textContent = 'Setup complete';
+  }
+}
+
+// v2: Floating Card
+function renderMobFloat() {
+  while (mobCurrentFloat < 3 && document.querySelectorAll('.mob-s-card.completed[data-mob-step="' + (mobCurrentFloat + 1) + '"]').length > 0) {
+    mobCurrentFloat++;
+  }
+  var progressFill = document.getElementById('mobFloatProgressFill');
+  progressFill.style.width = ((mobDone / 3) * 100) + '%';
+  // After step 1 — show congrats, nudge to desktop
+  if (mobDone >= 1 && mobCurrentFloat >= 1) {
+    document.getElementById('mobFloatNum').innerHTML = '<i class="fa-solid fa-rocket" style="font-size:10px"></i>';
+    document.getElementById('mobFloatStep').textContent = '1 of 3 done';
+    document.getElementById('mobFloatTitle').textContent = "You're off to a great start!";
+    document.getElementById('mobFloatDesc').textContent = 'The next steps work best on desktop — bigger screen, drag & drop, the works. Open SmarterQueue on your computer to keep going.';
+    document.getElementById('mobFloatMark').style.display = 'none';
+    document.getElementById('mobFloatGo').style.display = 'none';
+    return;
+  }
+  var step = mobSteps[mobCurrentFloat];
+  document.getElementById('mobFloatTitle').textContent = step.title;
+  document.getElementById('mobFloatDesc').textContent = step.desc;
+  document.getElementById('mobFloatNum').textContent = mobCurrentFloat + 1;
+  document.getElementById('mobFloatStep').textContent = 'Step ' + (mobCurrentFloat + 1) + ' of 3';
+  document.getElementById('mobFloatMark').style.display = '';
+  var goLink = document.getElementById('mobFloatGo');
+  if (step.go) { goLink.style.display = ''; goLink.textContent = step.go + ' ›'; }
+  else { goLink.style.display = 'none'; }
+}
+
+function mobFloatComplete() {
+  mobDone++;
+  mobCurrentFloat++;
+  updateMobSheetProgress();
+  var sheetCard = document.querySelector('.mob-s-card[data-mob-step="' + mobCurrentFloat + '"]');
+  if (sheetCard && !sheetCard.classList.contains('completed')) {
+    sheetCard.classList.add('completed');
+    sheetCard.classList.remove('active');
+    var num = sheetCard.querySelector('.mob-s-num');
+    if (num) num.innerHTML = '<i class="fa-solid fa-check" style="font-size:10px"></i>';
+  }
+  renderMobFloat();
+}
+
+function closeMobFloat() {
+  document.getElementById('mobFloat').classList.add('mob-hidden');
+  document.getElementById('mobFab').style.display = 'flex';
+  document.getElementById('mobFab').classList.remove('mob-hidden');
+  document.getElementById('mobFab').textContent = mobDone + '/3';
+}
+
+function openMobFloat() {
+  document.getElementById('mobFab').classList.add('mob-hidden');
+  setTimeout(function() {
+    document.getElementById('mobFab').style.display = 'none';
+    document.getElementById('mobFloat').style.display = 'block';
+    void document.getElementById('mobFloat').offsetWidth;
+    document.getElementById('mobFloat').classList.remove('mob-hidden');
+    renderMobFloat();
+  }, 250);
+}
+
+// Auto-init: KYC hidden, show onboarding directly
+if (window.innerWidth < 768) {
+  initMobileOnboarding();
+} else {
+  switchVersion('v4');
+}
 </script>
 
 </body>
